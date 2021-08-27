@@ -1,0 +1,207 @@
+body {
+  margin: 0;
+  padding: 50px 0;
+  background: #f69a73;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.wrapper {
+  height: 100%;
+  background-color: #fff;
+  margin: 0 auto;
+  border-radius: 10px;
+  max-width: 1400px;
+}
+
+.content {
+  padding: 40px 0;
+}
+
+
+
+/* ------------------------------
+  Header */
+
+.header {
+  font-family: 'Montserrat', sans-serif;
+  padding: 30px 0;
+  border-bottom: 1px solid #C0C0C0;
+}
+
+
+
+.nav_title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #000;
+  text-decoration: none;
+}
+
+.nav_subtitle {
+  color: #707981;
+  margin: 0;
+}
+
+.header_btn {
+  text-decoration: none;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #FD5026;
+  border: none;
+  border-radius: 25px;
+  margin-right: 10px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
+  transition: .3s;
+}
+
+.header_btn:hover {
+  background: #FD5026;
+  box-shadow: 0 15px 20px rgba(253, 80, 38, .4);
+  color: white;
+  transform: translateY(-7px);
+}
+
+.header_btn:focus{
+  background:#FD5026 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.header_item {
+  margin-right:10px ;
+}
+
+/*---------------------------------------
+ Form */
+.form {
+  position: relative;
+  max-width: 400px;
+  margin: 20px auto 20px;
+  border-radius: 30px;
+  box-shadow: 0 5px 10px 0 rgb(0 0 0 / 10%);
+}
+
+.form_inner {
+  padding: 50px;
+}
+
+.form_inner h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  color: #707981;
+}
+
+.form_inner input,
+textarea {
+  display: block;
+  width: 100%;
+  padding: 0 20px;
+  margin-bottom: 10px;
+  background: #E9EFF6;
+  border: none;
+  border-radius: 20px;
+  line-height: 40px;
+}
+
+.form_inner textarea {
+  max-height: 250px;
+  min-height: 80px;
+  line-height: 30px;
+}
+
+/* .form_inner [type="file"] {
+  background: #f15d21;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+	font-family: 'Rubik', sans-serif;
+	font-size: inherit;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  outline: none;
+  padding: 1rem 50px;
+  position: relative;
+  transition: all 0.3s;
+  vertical-align: middle;
+} */
+.form_inner [type="submit"] {
+  margin-top: 30px;
+  color: #fff;
+  font-size: 14px;
+  border: none;
+  background-color: #FD5026;
+  border-bottom: 4px solid #db451f;
+}
+
+.form_inner [type="submit"]:active {
+  box-shadow: 0 0 0 60px rgba(0, 0, 0, .05) inset;
+}
+.form-select_menu { 
+  width: 100%;
+}
+
+
+/* collect */
+
+.collect-header {
+  margin: 10px 0 40px
+}
+
+.collect-header h2 {
+  margin: 0;
+}
+
+.collect-theme {
+  margin-top: 20px;
+  font-size: 20px;
+  color:#db451f;
+  font-weight: bold;
+}
+
+.collect-card{
+  border-radius: 30px;
+  box-shadow: 0 5px 10px 0 rgb(0 0 0 / 10%);
+  border: none;
+	overflow: hidden;
+}
+
+.collect-title {
+  margin: 35px 0;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  
+}
+.overflow {
+  height: 300px;
+  overflow: hidden;
+}
+
+.collect-card {
+  width: 100%;
+  margin-bottom: 65px;
+}
+
+.collect-card_title {
+  font-size: 20px;
+  font-weight: 900;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 10px;
+}
+
+.collect_icon {
+  cursor: pointer;
+}
+
+.formControl {
+  width: 300px;
+  max-width: 300px;
+}
