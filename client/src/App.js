@@ -14,8 +14,13 @@ import Account from './pages/Account'
 import Profile from './pages/Profile';
 import ChangeCollect from './pages/ChangeCollect';
 import {AuthContext} from './helpers/AuthContext'
+import {AdminContext} from './helpers/AdminContext'
 import Collection from './pages/Collection';
 import Item from './pages/Item';
+import AddCollection from './pages/AddCollection';
+import AdminPanel from './pages/AdminPanel';
+import EditItem from './pages/EditItem';
+
 
 
 function App() {
@@ -24,8 +29,9 @@ function App() {
     login: "",
     id: 0,
     status: false,
-
   })
+
+  const [checkUserState, setCheckUserState] = useState({role: ""})
   useEffect(() => {
     // if(localStorage.getItem('token')) {
     //   setAuthState(true)
@@ -39,41 +45,48 @@ function App() {
       if(response.data.error) {
         setAuthState({status: false });
       } else {
+        setCheckUserState({ role: response.data.check.role})
         setAuthState({
-          login: response.data.login,
-          id: response.data.id,
+          login: response.data.validate.login,
+          id: response.data.validate.id,
           status: true
         })
       }
     });
-
+    // axios.get()
   }, [])
 
   return (
    <>
    <AuthContext.Provider value={{authState, setAuthState}}>
-    <Router>
-      <div className="wrapper">
-        <Header/>
-        <div className="content">
-          <Container>
+     <AdminContext.Provider value={{checkUserState, setCheckUserState}}>
+      <Router>
+        <div className="wrapper">
+          <Header/>
+          <div className="content">
+            <Container>
 
-            <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/signup" component={Signup}/>
-                <Route exact path="/signin" component={SignIn}/>
-                <Route exact path="/account" component={Account}/>
-                <Route exact path="/clctn/:id" component={Collection}/>
-                <Route exact path="/chgcoll/:id" component={ChangeCollect}/>
-                <Route exact path="/item/:id" component={Item}/>
-                <Route exact path="/profile/:id" component={Profile}/>
+              <Switch>
+                  <Route exact path="/" component={Home} />
+                  <Route exact path="/signup" component={Signup}/>
+                  <Route exact path="/signin" component={SignIn}/>
+                  <Route exact path="/account" component={Account}/>
+                  <Route exact path="/clctn/:id" component={Collection}/>
+                  <Route exact path="/chgcoll/:id" component={ChangeCollect}/>
+                  <Route exact path="/item/:id" component={Item}/>
+                  <Route exact path="/profile/:id" component={Profile}/>
+                  <Route exact path="/addcollection/:id" component={AddCollection}/>
+                  <Route exact path="/adminpanel" component={AdminPanel}/>
+                  <Route exact path="/edititem/:id" component={EditItem}/>
+                  
 
-            </Switch>
-         </Container>
+              </Switch>
+           </Container>
+          </div>
         </div>
-      </div>
 
-    </Router>
+      </Router>
+    </AdminContext.Provider>
     </AuthContext.Provider>
    </>
   )

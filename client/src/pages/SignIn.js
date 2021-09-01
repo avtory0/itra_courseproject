@@ -1,6 +1,7 @@
 import React, {useState, useContext} from 'react'
 import { useHistory } from 'react-router'
 import {AuthContext} from '../helpers/AuthContext'
+import { AdminContext } from '../helpers/AdminContext';
 import GoogleAuth from '../components/GoogleAuth';
 
 import "../App.css";
@@ -11,6 +12,7 @@ export default function SignIn() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const {setAuthState} = useContext(AuthContext)  
+  const {setCheckUserState} = useContext(AdminContext);
 
     let history = useHistory();
 
@@ -21,15 +23,14 @@ export default function SignIn() {
           if(response.data.error){
             alert(response.data.error);
           } else{
+            setCheckUserState({role: response.data.role})
             localStorage.setItem("token", response.data.token);
             setAuthState({
               login: response.data.login,
               id: response.data.id,
-              status: true,
-              role: response.data.role
+              status: true
             });
-            
-            history.push("/account");
+            history.push(`/profile/${response.data.id}`);
             // history.push(`/profile/${response.data.id}`);
           }
         });

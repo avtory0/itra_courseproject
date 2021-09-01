@@ -14,10 +14,12 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
+    "username": "bedcbec5278ef0",
     "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "database": "be4abcb3",
+    "host": "eu-cdbr-west-01.cleardb.com",
     "dialect": "mysql"
   }
 }
+
+

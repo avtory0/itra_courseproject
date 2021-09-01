@@ -116,23 +116,6 @@ textarea {
   line-height: 30px;
 }
 
-/* .form_inner [type="file"] {
-  background: #f15d21;
-  border: none;
-  border-radius: 5px;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-	font-family: 'Rubik', sans-serif;
-	font-size: inherit;
-  font-weight: 500;
-  margin-bottom: 1rem;
-  outline: none;
-  padding: 1rem 50px;
-  position: relative;
-  transition: all 0.3s;
-  vertical-align: middle;
-} */
 .form_inner [type="submit"] {
   margin-top: 30px;
   color: #fff;
@@ -147,7 +130,41 @@ textarea {
 }
 .form-select_menu { 
   width: 100%;
+  margin-bottom: 10px;
 }
+
+.dropzone {
+
+  display: flex;
+  align-items: center;
+  width: 450px;
+  max-width: 100%;
+  padding: 25px;
+  border: 2px dashed rgba(253, 80, 38, 0.4);
+  border-radius: 10px;
+  transition: 0.2s;
+}
+
+.fake-btn {
+  flex-shrink: 0;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(253, 80, 38, 0.5);
+  border-radius: 10px;
+  padding: 8px 15px;
+  margin-right: 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.file-msg {
+  font-size: small;
+  font-weight: 300;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 
 
 /* collect */
@@ -197,6 +214,10 @@ textarea {
   margin-bottom: 10px;
 }
 
+.collect-card_theme {
+  color: #FD5026
+}
+
 .collect_icon {
   cursor: pointer;
 }
@@ -205,3 +226,65 @@ textarea {
   width: 300px;
   max-width: 300px;
 }
+
+
+.card {
+  border-radius: 10px;
+  margin-top: 50px;
+  border: 1px solid lightgray;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+}
+
+.card .name {
+  font-size: 20px;
+  font-weight: bold;
+  border-bottom: 1px solid lightgray;
+  cursor: pointer;
+}
+
+.card .tags {
+  text-align: center;
+  padding: 5px 0;
+}
+
+.card .card-footer {
+  border-top: 1px solid lightgray;
+  padding: 5px 0;
+  align-items: center ;
+}
+
+.card svg {
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+/* .likeBttn {
+  color: #1e90ff
+}
+.unlikeBttn {
+  color: #000;
+} */
+
+.main-btn {
+  color: #fff;
+  font-size: 14px;
+  border: none;
+  background-color: #FD5026;
+  border-bottom: 4px solid #db451f;
+}
+
+
+/* body.light {
+  --background-color: var(--white);
+  --text-color: var(--blue);
+  --font-weight: 400;
+  --image: url("../day.jpg");
+}
+
+body.dark {
+  --background-color: var(--blue);
+  --text-color: var(--white);
+  --font-weight: 500;
+  --image: url("../night.jpg");
+} */

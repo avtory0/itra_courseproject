@@ -24,13 +24,13 @@ export default function Signup() {
     const onSubmit =(data) => {
         axios.post("http://localhost:3001/auth", data).then((response) => {
             localStorage.setItem('token', response.data.token);
-            history.push('/account')
             setAuthState({
                 login: response.data.login,
                 id: response.data.id,
                 status: true,
             });
             console.log(data);
+            // history.push(`/profile/${response.data.id}`);
       
         });
     }

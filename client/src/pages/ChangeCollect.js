@@ -4,6 +4,7 @@ import { useHistory } from "react-router"
 import MultiplySelect from '../components/MultiplySelect';
 import axios from "axios";
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 
 import "../App.css";
 
@@ -88,20 +89,23 @@ export default function ChangeCollect() {
             <div className="row">
                 {listOfItems.map((value,key) => {
                     return(
-                        <div key={key} className="col-md-4">
+                        <div key={key} className="col-md-3">
+                            <div className="card text-center collect-card">
                             <div className="name" onClick={() => {
                                 history.push(`/item/${value.id}`)
                             }}>{value.name}</div>
                             <div className="tags">{value.tags}</div>
-                            
+                            <div className="card-footer">
                             <DeleteIcon className="collect_icon"
                             onClick={() => {
                             deleteItem(value.id);
                             }}
                             />
-                            <button onClick={() =>{
+                            <EditIcon onClick={() =>{
                                 editItem(value.id)
-                            }}>edit</button>
+                            }}/>
+                            </div>
+                            </div>
                         </div>
                     )
                 })}

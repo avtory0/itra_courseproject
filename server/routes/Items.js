@@ -31,14 +31,14 @@ router.post("/add", async(req,res) => {
     const checId = data.id
     if(checId==null){
     await Items.create(data);
-    res.json(data) }
-    else {
+    res.json(data) 
+    }else {
         await Items.update(data,{
             where: {
                 id: checId
             }
         })
-        res.json("get it")
+        res.json(data)
     }
 });
 

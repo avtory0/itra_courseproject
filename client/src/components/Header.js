@@ -3,10 +3,12 @@ import {Navbar, Container, Dropdown} from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
 import {AuthContext} from '../helpers/AuthContext'
 import PersonIcon from '@material-ui/icons/Person';
+import { AdminContext } from '../helpers/AdminContext';
 
 
 export default function Header() {
   const {authState, setAuthState} = useContext(AuthContext)
+  const {checkUserState} = useContext(AdminContext);
 
   let history = useHistory();
 
@@ -49,10 +51,15 @@ export default function Header() {
                   <Dropdown.Menu>
                     <Dropdown.Item onClick= {() => {
                       // history.push(`/profile/${authState.id})`
-                      history.push('/account')
+                      history.push(`/profile/${authState.id}`)
                       }}>
-                        Action
+                        Account
                     </Dropdown.Item>
+                    {checkUserState.role ==="admin" && (
+                      <Dropdown.Item onClick={() => {
+                        history.push("/adminpanel")
+                      }}> Admin Panel</Dropdown.Item>
+                    )}
                     <Dropdown.Item onClick={logout}> logout</Dropdown.Item>
                    
                   </Dropdown.Menu>

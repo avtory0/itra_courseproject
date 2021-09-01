@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { Users } = require("../models");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const {validateToken} = require('../middlewares/AuthMiddlewares')
 const {sign} = require('jsonwebtoken');
 
@@ -33,8 +33,8 @@ router.post("/", async (req, res) => {
     {login: req.body.login, id: req.body.id},
     "secretstring"
     ); 
-    
-    res.json({token: token, login:req.body.login, id: req.body.id});
+    console.log(token)
+    res.json({token: token, login: login, id: req.body.id});
 } catch(err) {
   console.log(err);
 }
@@ -47,6 +47,7 @@ router.post("/login", async (req, res) => {
   const user = await Users.findOne({ where: { login: login } });
 
   if (!user) res.json({ error: "User Doesn't Exist" });
+  if (user.status === "block") res.json({error: "user was blocked"})
 
   bcrypt.compare(password, user.password).then((match) => {
     if (!match) res.json({ error: "Wrong Username And Password Combination" });
@@ -56,8 +57,8 @@ router.post("/login", async (req, res) => {
       "secretstring"
       );  
       
-
-      res.json({token: token, login: login, id: user.id});
+      console.log(user.role)
+      res.json({token: token, login: login, id: user.id, role: user.role});
   });
 });
 
@@ -89,9 +90,52 @@ router.post("/googleauth", async(req,res) => {
 
 })
 
+router.get("/profile/:id", async(req,res) => {
+  const userid = req.params.id;
+  const user = await Users.findOne({where: {id: userid}})
+  res.json(user);
+})
 
-router.get("/check", validateToken, (req,res) => {
-  res.json(req.user);
+router.get("/getall", async(req,res) => {
+  const allUsers = await Users.findAll();
+  res.json(allUsers)
+})
+
+router.get("/check", validateToken, async(req,res) => { //если что убери async
+  const id = req.user.id;
+  const checkUser = await Users.findOne({where: {id: id}}) 
+
+  res.json({ validate: req.user, check: checkUser });
 });
+
+router.put("/blockuser/:id", async(req,res) => {
+  const id = req.params.id;
+  const checkStatus = await Users.findOne({
+    // attributes: ['status'],
+    where: { id: id}
+  })
+  if(checkStatus.status === "normal") {
+    await Users.update({status: "block"},{ where: {id: id}})
+    res.json("blocked")
+  } else {
+    await Users.update({status: "normal"},{ where: {id: id}})
+    res.json("unblock")
+  }
+})
+
+router.post("/roleuser/:id", async(req, res) => {
+  const id = req.params.id;
+  const checkRole = await Users.findOne({
+    where: { id: id}
+  })
+
+  if(checkRole.role === "user") {
+    await Users.update({role: "admin"},{ where: {id: id}})
+    res.json("admin now")
+  } else {
+    await Users.update({role: "user"},{ where: {id: id}})
+    res.json("user now")
+  }
+})
 
 module.exports = router;

@@ -6,12 +6,15 @@ import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import IconButton from '@material-ui/core/IconButton';
 import {AuthContext} from '../helpers/AuthContext'
 
+
 import "../App.css";
 
 export default function Collection() {
     let {id} = useParams();
     const [collectObject, setCollectObject] = useState({});
     const [listOfItems, setListOfItems] = useState([]);
+
+    
 
     const {authState} = useContext(AuthContext) 
 
@@ -25,8 +28,9 @@ export default function Collection() {
 
 
         axios.get(`http://localhost:3001/items/${id}`).then((response) => {
-            console.log(response.data)
+            // console.log(response.data.likedItems)
             setListOfItems(response.data);
+
         });   
     }, []);
 
@@ -60,11 +64,13 @@ export default function Collection() {
             <div className="row">
                 {listOfItems.map((value,key) => {
                     return(
-                        <div key={key} className="col-md-4">
+                        <div key={key} className="col-md-3">
+                        <div className="card text-center collect-card">
                             <div className="name" onClick={() => {
                                 history.push(`/item/${value.id}`)
                             }}>{value.name}</div>
                             <div className="tags">{value.tags}</div>
+                            <div className="card-footer">
                             {!authState.status ? (
                                 <> 
                                 <IconButton disabled>
@@ -74,10 +80,14 @@ export default function Collection() {
                                 </>
                             ) : (
                                 <> 
-                                <ThumbUpAltIcon onClick={() => {likeItem(value.id)}}/>
+                                <ThumbUpAltIcon onClick={() => {likeItem(value.id)}}
+
+                                  />
                                 </>
                             )}
                             <label>{value.Likes.length}</label>
+                            </div>
+                        </div>
                         </div>
                     )
                 })}

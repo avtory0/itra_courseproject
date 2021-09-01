@@ -5,9 +5,9 @@ const {validateToken} = require('../middlewares/AuthMiddlewares')
 
 Collections.belongsTo(Users);
 
-router.get("/", validateToken, async(req,res) => {
-    const UserId = req.user.id;
-    console.log(req.user.login)
+router.get("/getprofile/:id",  async(req,res) => {
+    const UserId = req.params.id;
+
     const listOfCollect = await Collections.findAll({
         where: {
             UserId: UserId
@@ -27,28 +27,27 @@ router.get("/check/:id", async(req,res) => {
     res.json(collect)
 })
 
-router.post("/add/:id", validateToken, async(req,res) => {
-    const id = req.params.id;
+router.post("/add/:id", async(req,res) => {
+    // const id = req.params.id;
     const post = req.body;
-    post.UserId = req.user.id;
-    const check =  await Collections.findOne({
-        where: {
-            id: id
-        }
-    })
-    if(check) {
-        await Collections.update(post, {
-            where: {
-                id: id
-            }
-        })
-        res.json(post)
-    } else {
-        await Collections.create(post);
-        res.json(post)
-    }
-    // await Collections.create(post);
-    // res.json(post)
+    await Collections.create(post);
+    res.json(post)
+    // post.UserId = req.user.id;
+    // const check =  await Collections.findOne({
+    //     where: {
+    //         id: id
+    //     }
+    // })
+    // if(check) {
+    //     await Collections.update(post, {
+    //         where: {
+    //             id: id
+    //         }
+    //     })
+    //     res.json(post)
+    // } else {
+    
+   
 });
 
 router.delete("/:collectId", async(req,res) => {
